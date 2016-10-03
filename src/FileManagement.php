@@ -20,11 +20,13 @@ class FileManagement {
         foreach (new \DirectoryIterator($dir) as $file) {
             if (!$file->isDot()) {
                 if ($file->isDir()) {
-                    array_push($folders, [
-                        'type'     => 'folder',
-                        'filename' => $file->getFilename(),
-                        'path'     => str_replace('\\', '/', $file->getPathname())
-                    ]);
+                    if(!in_array($file->getFilename(), $auth_config['hidden_folders'])){
+                        array_push($folders, [
+                            'type'     => 'folder',
+                            'filename' => $file->getFilename(),
+                            'path'     => str_replace('\\', '/', $file->getPathname())
+                        ]);
+                    }
                 } else {
                     $ex = $file->getExtension();
                     if (in_array($ex, self::$photo_formats)) {
