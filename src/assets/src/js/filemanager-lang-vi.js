@@ -1,5 +1,6 @@
 var filemanager_lang_vi = {
     'error_connection' : 'Lỗi kết nối. Vui lòng tải lại trang.',
+    'search'           : 'Tìm kiếm',
     'disk_space'       : 'Dung lượng',
     'file'             : 'tập tin',
     'folder'           : 'thư mục',

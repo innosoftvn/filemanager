@@ -1,5 +1,6 @@
 var filemanager_lang_en = {
     'error_connection' : 'Error connecting. Please reload the page.',
+    'search'           : 'Search',
     'disk_space'       : 'Disk space',
     'file'             : 'file',
     'folder'           : 'folder',

@@ -641,3 +641,30 @@
 .photo-editor .editor-toolbar .btnx:hover{
     background-color: #029be5;
 }
+
+#search-wrap {
+    position: relative;
+    display: inline-block;
+}
+#search-wrap .form-control {
+    padding-right: 35px!important;
+}
+#search-wrap #search-clear[data-toggle="true"] {
+    display: block;
+}
+#search-wrap #search-clear {
+    position: absolute;
+    top: 0;
+    font-size: 19px;
+    font-style: normal;
+    width: 30px;
+    text-align: center;
+    border-radius: 0 3px 3px 0;
+    cursor: pointer;
+    right: 0;
+    height: 29px;
+    padding-top: 6px;
+    color: #333;
+    display: none;
+    background-color: #ccc;
+}

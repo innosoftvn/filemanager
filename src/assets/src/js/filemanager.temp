@@ -74,6 +74,12 @@
                         <ul>
                     </div>
                     <!-- /ko -->
+					<div class="btn-group" role="group">
+                        <div id="search-wrap">
+                            <input class="form-control input-sm" data-bind="event: {keyup: doSearch}, attr:{placeholder: params.labels.search}">
+                            <i id="search-clear" class="fa fa-times" aria-hidden="true" data-bind="click: clearSearch, attr: {'data-toggle': search()!=''}"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
             <ol class="breadcrumb">
@@ -117,7 +123,7 @@
                 <div class="badge" data-bind="html: params.labels.select_all, click: select_all.bind($data, 'files')"></div>
             </div>
             <!--ko foreach: videos-->
-            <!-- ko if: $parent.filter() === "" || $parent.filter() === "videos" || $parent.filter() === extension -->
+            <!-- ko if: ($parent.filter() === "" || $parent.filter() === "videos" || $parent.filter() === extension) && ( $parent.search() === "" || String(filename).latinise().toLowerCase().indexOf(String($parent.search()).latinise().toLowerCase()) !== -1) -->
             <div style="display:none;" data-bind="attr:{id: 'video'+($index()+1)}">
                 <video class="lg-video-object lg-html5" controls preload="none">
                     <source data-bind="attr: {src: $parent.params.public_path + path}">
@@ -126,7 +132,7 @@
             <!--/ko-->
             <!--/ko-->
             <!--ko foreach: audios-->
-            <!-- ko if: $parent.filter() === "" || $parent.filter() === "audios" || $parent.filter() === extension -->
+            <!-- ko if: ($parent.filter() === "" || $parent.filter() === "audios" || $parent.filter() === extension) && ( $parent.search() === "" || String(filename).latinise().toLowerCase().indexOf(String($parent.search()).latinise().toLowerCase()) !== -1) -->
             <div style="display:none;" data-bind="attr:{id: 'audio'+($index()+1)}">
                 <div class="lg-audio-container">
                     <div class="lg-disk-cd"></div>
@@ -149,7 +155,7 @@
             <!--/ko-->
             <!--/ko-->
             <!--ko foreach: files-->
-            <!-- ko if: $parent.filter() === "" || $parent.filter() === "files" || $parent.filter() === extension -->
+            <!-- ko if: ($parent.filter() === "" || $parent.filter() === "files" || $parent.filter() === extension) && ( $parent.search() === "" || String(filename).latinise().toLowerCase().indexOf(String($parent.search()).latinise().toLowerCase()) !== -1) -->
             <div style="display:none;" data-bind="attr:{id: 'file'+($index()+1)}">
                 <div class="lg-file-container" data-bind="attr: {'style': 'background-image: url(' + ($parent.extension_thumbnails[extension] === undefined ? $parent.extension_thumbnails['unknown']:$parent.extension_thumbnails[extension]) + ');' }"></div>
             </div>
@@ -157,7 +163,7 @@
             <!--/ko-->
             <div id="lightgallery">
                 <!--ko foreach: photos-->
-                <!-- ko if: $parent.filter() === "" || $parent.filter() === "photos" || $parent.filter() === extension -->
+                <!-- ko if: ($parent.filter() === "" || $parent.filter() === "photos" || $parent.filter() === extension) && ( $parent.search() === "" || String(filename).latinise().toLowerCase().indexOf(String($parent.search()).latinise().toLowerCase()) !== -1) -->
                 <div data-type="photo" data-bind="attr: {class: $.inArray($rawData, $parent.ids())>=0 ? 'item selected':'item', 'data-raw': JSON.stringify($data), 'data-src': $parent.params.public_path + path}">
                     <span class="item-select fa" data-bind="click: $parent.select_item"></span>
                     <div class="item-preview" data-bind="attr: {title: filename + '.' + extension, 'data-src': $parent.params.public_path + path, 'data-sub-html': filename+ '.'+extension+'<br><small>'+size+' KB</small>'}">
@@ -168,7 +174,7 @@
                 <!-- /ko -->
                 <!--/ko-->
                 <!--ko foreach: videos-->
-                <!-- ko if: $parent.filter() === "" || $parent.filter() === "videos" || $parent.filter() === extension -->
+                <!-- ko if: ($parent.filter() === "" || $parent.filter() === "videos" || $parent.filter() === extension) && ( $parent.search() === "" || String(filename).latinise().toLowerCase().indexOf(String($parent.search()).latinise().toLowerCase()) !== -1) -->
                 <div data-type="file" data-bind="attr: {class: $.inArray($rawData, $parent.ids())>=0 ? 'item selected':'item', 'data-raw': JSON.stringify($data), 'data-src': $parent.params.public_path + path}">
                     <span class="item-select fa" data-bind="click: $parent.select_item"></span>
                     <div class="item-preview" data-bind="attr: {title: filename + '.' + extension, 'data-download-url': $parent.params.public_path + path, 'data-html': '#video'+($index()+1), 'data-sub-html': filename+ '.'+extension+'<br><small>'+size+' KB</small>'}" data-poster="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAABkCAYAAABkW8nwAAAACXBIWXMAAA7DAAAOwwHHb6hkAAABCUlEQVR4nO3SQQHAIADEsBv+PTMT9JdoyLftDh47g4BYJMQiIRYJsUiIRUIsEmKREIuEWCTEIiEWCbFIiEVCLBJikRCLhFgkxCIhFgmxSIhFQiwSYpEQi4RYJMQiIRYJsUiIRUIsEmKREIuEWCTEIiEWCbFIiEVCLBJikRCLhFgkxCIhFgmxSIhFQiwSYpEQi4RYJMQiIRYJsUiIRUIsEmKREIuEWCTEIiEWCbFIiEVCLBJikRCLhFgkxCIhFgmxSIhFQiwSYpEQi4RYJMQiIRYJsUiIRUIsEmKREIuEWCTEIiEWCbFIiEVCLBJikRCLhFgkxCIhFgmxSIhFQiwSYpEQi4RYJMQisP2HrgHHDkcEwwAAAABJRU5ErkJggg==">
@@ -179,7 +185,7 @@
                 <!--/ko-->
                 <!--/ko-->
                 <!--ko foreach: audios-->
-                <!-- ko if: $parent.filter() === "" || $parent.filter() === "audios" || $parent.filter() === extension -->
+                <!-- ko if: ($parent.filter() === "" || $parent.filter() === "audios" || $parent.filter() === extension) && ( $parent.search() === "" || String(filename).latinise().toLowerCase().indexOf(String($parent.search()).latinise().toLowerCase()) !== -1) -->
                 <div data-type="file" data-bind="attr: {class: $.inArray($rawData, $parent.ids())>=0 ? 'item selected':'item', 'data-raw': JSON.stringify($data), 'data-src': $parent.params.public_path + path}">
                     <span class="item-select fa" data-bind="click: $parent.select_item"></span>
                     <div class="item-preview" data-cus-type="audio" data-bind="attr: {'data-cus-html': '#audio'+($index()+1), title: filename + '.' + extension, 'data-src': $parent.params.public_path + path, 'data-sub-html': filename+ '.'+extension+'<br><small>'+size+' KB</small>'}">
@@ -190,7 +196,7 @@
                 <!--/ko-->
                 <!--/ko-->
                 <!--ko foreach: files-->
-                <!-- ko if: $parent.filter() === "" || $parent.filter() === "files" || $parent.filter() === extension -->
+                <!-- ko if: ($parent.filter() === "" || $parent.filter() === "files" || $parent.filter() === extension) && ( $parent.search() === "" || String(filename).latinise().toLowerCase().indexOf(String($parent.search()).latinise().toLowerCase()) !== -1) -->
                 <div data-type="file" data-bind="attr: {class: $.inArray($rawData, $parent.ids())>=0 ? 'item selected':'item', 'data-raw': JSON.stringify($data), 'data-src': $parent.params.public_path + path}">
                     <span class="item-select fa" data-bind="click: $parent.select_item"></span>
                     <div class="item-preview" data-bind="attr: {'data-cus-html': '#file'+($index()+1), title: filename + '.' + extension, 'data-src': $parent.params.public_path + path, 'data-sub-html': filename+ '.'+extension+'<br><small>'+size+' KB</small>'}">

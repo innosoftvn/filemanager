@@ -53,6 +53,85 @@
     };
 })(jQuery, window);
 
+String.prototype.latinise = function() {
+    //thay thế chữ thường
+    var str = this;
+    str = str.replace( /å|ä|ā|à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ|ä|ą/g, 'a' );
+    str = str.replace( /ß|ḃ/g, "b" );
+    str = str.replace( /ç|ć|č|ĉ|ċ|¢|©/g, 'c' );
+    str = str.replace( /đ|ď|ḋ|đ/g, 'd' );
+    str = str.replace( /è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ|ę|ë|ě|ė/g, 'e' );
+    str = str.replace( /ḟ|ƒ/g, "f" );
+    str = str.replace( /ķ/g, "k" );
+    str = str.replace( /ħ|ĥ/g, "h" );
+    str = str.replace( /ì|í|î|ị|ỉ|ĩ|ï|î|ī|¡|į/g, 'i' );
+    str = str.replace( /ĵ/g, "j" );
+    str = str.replace( /ṁ/g, "m" );
+
+    str = str.replace( /ö|ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ|ö|ø|ō/g, 'o' );
+    str = str.replace( /ṗ/g, "p" );
+    str = str.replace( /ġ|ģ|ğ|ĝ/g, "g" );
+    str = str.replace( /ü|ù|ú|ū|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ|ü|ų|ů/g, 'u' );
+    str = str.replace( /ỳ|ý|ỵ|ỷ|ỹ|ÿ/g, 'y' );
+    str = str.replace( /ń|ñ|ň|ņ/g, 'n' );
+    str = str.replace( /ŝ|š|ś|ṡ|ș|ş|³/g, 's' );
+    str = str.replace( /ř|ŗ|ŕ/g, "r" );
+    str = str.replace( /ṫ|ť|ț|ŧ|ţ/g, 't' );
+
+    str = str.replace( /ź|ż|ž/g, 'z' );
+    str = str.replace( /ł|ĺ|ļ|ľ/g, "l" );
+
+    str = str.replace( /ẃ|ẅ/g, "w" );
+
+    str = str.replace( /æ/g, "ae" );
+    str = str.replace( /þ/g, "th" );
+    str = str.replace( /ð/g, "dh" );
+    str = str.replace( /£/g, "pound" );
+    str = str.replace( /¥/g, "yen" );
+
+    str = str.replace( /ª/g, "2" );
+    str = str.replace( /º/g, "0" );
+    str = str.replace( /¿/g, "?" );
+
+    str = str.replace( /µ/g, "mu" );
+    str = str.replace( /®/g, "r" );
+
+    //thay thế chữ hoa
+    str = str.replace( /Ä|À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ|Ą|Å|Ā/g, 'A' );
+    str = str.replace( /Ḃ|B/g, 'B' );
+    str = str.replace( /Ç|Ć|Ċ|Ĉ|Č/g, 'C' );
+    str = str.replace( /Đ|Ď|Ḋ/g, 'D' );
+    str = str.replace( /È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ|Ę|Ë|Ě|Ė|Ē/g, 'E' );
+    str = str.replace( /Ḟ|Ƒ/g, "F" );
+    str = str.replace( /Ì|Í|Ị|Ỉ|Ĩ|Ï|Į/g, 'I' );
+    str = str.replace( /Ĵ|J/g, "J" );
+
+    str = str.replace( /Ö|Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ|Ø/g, 'O' );
+    str = str.replace( /Ü|Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ|Ū|Ų|Ů/g, 'U' );
+    str = str.replace( /Ỳ|Ý|Ỵ|Ỷ|Ỹ|Ÿ/g, 'Y' );
+    str = str.replace( /Ł/g, "L" );
+    str = str.replace( /Þ/g, "Th" );
+    str = str.replace( /Ṁ/g, "M" );
+
+    str = str.replace( /Ń|Ñ|Ň|Ņ/g, "N" );
+    str = str.replace( /Ś|Š|Ŝ|Ṡ|Ș|Ş/g, "S" );
+    str = str.replace( /Æ/g, "AE" );
+    str = str.replace( /Ź|Ż|Ž/g, 'Z' );
+
+    str = str.replace( /Ř|R|Ŗ/g, 'R' );
+    str = str.replace( /Ț|Ţ|T|Ť/g, 'T' );
+    str = str.replace( /Ķ|K/g, 'K' );
+    str = str.replace( /Ĺ|Ł|Ļ|Ľ/g, 'L' );
+
+    str = str.replace( /Ħ|Ĥ/g, 'H' );
+    str = str.replace( /Ṗ|P/g, 'P' );
+    str = str.replace( /Ẁ|Ŵ|Ẃ|Ẅ/g, 'W' );
+    str = str.replace( /Ģ|G|Ğ|Ĝ|Ġ/g, 'G' );
+    str = str.replace( /Ŧ|Ṫ/g, 'T' );
+
+    return str;
+};
+
 ko.components.register('filemanager', {
     viewModel: function (params) {
         var self = this;
@@ -79,7 +158,7 @@ ko.components.register('filemanager', {
         self.filter_label = ko.observable(params.labels.all);
         self.uploadprogress = ko.observable(false);
         self.uploadsuccess = ko.observable(0);
-        self.search = ko.observable();
+        self.search = ko.observable('');
         self.is_search = ko.observable(false);
         self.disk_space_info = ko.observable('');
         self.disk_space_percent_info = ko.observable(0);
@@ -437,7 +516,7 @@ ko.components.register('filemanager', {
         };
 
         self.fetch = function () {
-            $.ajax({url: params.url, type: 'post', data: {_token: params.token, path: self.path, search: self.search(), disk_space: disk_space, disk_space_usage: disk_space_usage, disk_space_usage_computed: disk_space_usage_computed},
+            $.ajax({url: params.url, type: 'post', data: {_token: params.token, path: self.path, disk_space: disk_space, disk_space_usage: disk_space_usage, disk_space_usage_computed: disk_space_usage_computed},
                 beforeSend: function(){
                     self.is_search(true);
                     self.loading(true);
@@ -697,13 +776,41 @@ ko.components.register('filemanager', {
             a[0].click();
             a.remove();
         };
+        
+        self.doSearch = function(data, event){
+            self.ids([]);
+            self.destroy_lg();
+            self.search($(event.target).val());
+            $('#lightgallery').removeAttr('lg-uid');
+            $('#lightgallery').removeAttr('lg-event-uid');
+            lightGallery(document.getElementById('lightgallery'), {
+                thumbnail:true,
+                selector: '.item-preview'
+            });
+            self.contextMenuInit();
+        };
+        
+        self.clearSearch = function(data, event){
+            $(event.target).parent().children('input').val('');
+            self.ids([]);
+            self.destroy_lg();
+            self.search('');
+            $('#lightgallery').removeAttr('lg-uid');
+            $('#lightgallery').removeAttr('lg-event-uid');
+            lightGallery(document.getElementById('lightgallery'), {
+                thumbnail:true,
+                selector: '.item-preview'
+            });
+            self.contextMenuInit();
+        };
 
         ko.computed(self.fetch);
 
 
         // <div data-bind="template: {name: params.template, afterRender: filemanager_rendered }"></div>
     },
-    template: '<div data-bind="attr: {class: loading() ? \'loading open\':\'loading\'}">\
+    template: '<script type="text/html" id="filemanager-template">\
+    <div data-bind="attr: {class: loading() ? \'loading open\':\'loading\'}">\
         <span class="g-loading-container">\
             <div></div>\
             <div></div>\
@@ -778,6 +885,12 @@ ko.components.register('filemanager', {
                         <ul>\
                     </div>\
                     <!-- /ko -->\
+					<div class="btn-group" role="group">\
+                        <div id="search-wrap">\
+                            <input class="form-control input-sm" data-bind="event: {keyup: doSearch}, attr:{placeholder: params.labels.search}">\
+                            <i id="search-clear" class="fa fa-times" aria-hidden="true" data-bind="click: clearSearch, attr: {\'data-toggle\': search()!=\'\'}"></i>\
+                        </div>\
+                    </div>\
                 </div>\
             </div>\
             <ol class="breadcrumb">\
@@ -821,7 +934,7 @@ ko.components.register('filemanager', {
                 <div class="badge" data-bind="html: params.labels.select_all, click: select_all.bind($data, \'files\')"></div>\
             </div>\
             <!--ko foreach: videos-->\
-            <!-- ko if: $parent.filter() === "" || $parent.filter() === "videos" || $parent.filter() === extension -->\
+            <!-- ko if: ($parent.filter() === "" || $parent.filter() === "videos" || $parent.filter() === extension) && ( $parent.search() === "" || String(filename).latinise().toLowerCase().indexOf(String($parent.search()).latinise().toLowerCase()) !== -1) -->\
             <div style="display:none;" data-bind="attr:{id: \'video\'+($index()+1)}">\
                 <video class="lg-video-object lg-html5" controls preload="none">\
                     <source data-bind="attr: {src: $parent.params.public_path + path}">\
@@ -830,7 +943,7 @@ ko.components.register('filemanager', {
             <!--/ko-->\
             <!--/ko-->\
             <!--ko foreach: audios-->\
-            <!-- ko if: $parent.filter() === "" || $parent.filter() === "audios" || $parent.filter() === extension -->\
+            <!-- ko if: ($parent.filter() === "" || $parent.filter() === "audios" || $parent.filter() === extension) && ( $parent.search() === "" || String(filename).latinise().toLowerCase().indexOf(String($parent.search()).latinise().toLowerCase()) !== -1) -->\
             <div style="display:none;" data-bind="attr:{id: \'audio\'+($index()+1)}">\
                 <div class="lg-audio-container">\
                     <div class="lg-disk-cd"></div>\
@@ -853,7 +966,7 @@ ko.components.register('filemanager', {
             <!--/ko-->\
             <!--/ko-->\
             <!--ko foreach: files-->\
-            <!-- ko if: $parent.filter() === "" || $parent.filter() === "files" || $parent.filter() === extension -->\
+            <!-- ko if: ($parent.filter() === "" || $parent.filter() === "files" || $parent.filter() === extension) && ( $parent.search() === "" || String(filename).latinise().toLowerCase().indexOf(String($parent.search()).latinise().toLowerCase()) !== -1) -->\
             <div style="display:none;" data-bind="attr:{id: \'file\'+($index()+1)}">\
                 <div class="lg-file-container" data-bind="attr: {\'style\': \'background-image: url(\' + ($parent.extension_thumbnails[extension] === undefined ? $parent.extension_thumbnails[\'unknown\']:$parent.extension_thumbnails[extension]) + \');\' }"></div>\
             </div>\
@@ -861,7 +974,7 @@ ko.components.register('filemanager', {
             <!--/ko-->\
             <div id="lightgallery">\
                 <!--ko foreach: photos-->\
-                <!-- ko if: $parent.filter() === "" || $parent.filter() === "photos" || $parent.filter() === extension -->\
+                <!-- ko if: ($parent.filter() === "" || $parent.filter() === "photos" || $parent.filter() === extension) && ( $parent.search() === "" || String(filename).latinise().toLowerCase().indexOf(String($parent.search()).latinise().toLowerCase()) !== -1) -->\
                 <div data-type="photo" data-bind="attr: {class: $.inArray($rawData, $parent.ids())>=0 ? \'item selected\':\'item\', \'data-raw\': JSON.stringify($data), \'data-src\': $parent.params.public_path + path}">\
                     <span class="item-select fa" data-bind="click: $parent.select_item"></span>\
                     <div class="item-preview" data-bind="attr: {title: filename + \'.\' + extension, \'data-src\': $parent.params.public_path + path, \'data-sub-html\': filename+ \'.\'+extension+\'<br><small>\'+size+\' KB</small>\'}">\
@@ -872,7 +985,7 @@ ko.components.register('filemanager', {
                 <!-- /ko -->\
                 <!--/ko-->\
                 <!--ko foreach: videos-->\
-                <!-- ko if: $parent.filter() === "" || $parent.filter() === "videos" || $parent.filter() === extension -->\
+                <!-- ko if: ($parent.filter() === "" || $parent.filter() === "videos" || $parent.filter() === extension) && ( $parent.search() === "" || String(filename).latinise().toLowerCase().indexOf(String($parent.search()).latinise().toLowerCase()) !== -1) -->\
                 <div data-type="file" data-bind="attr: {class: $.inArray($rawData, $parent.ids())>=0 ? \'item selected\':\'item\', \'data-raw\': JSON.stringify($data), \'data-src\': $parent.params.public_path + path}">\
                     <span class="item-select fa" data-bind="click: $parent.select_item"></span>\
                     <div class="item-preview" data-bind="attr: {title: filename + \'.\' + extension, \'data-download-url\': $parent.params.public_path + path, \'data-html\': \'#video\'+($index()+1), \'data-sub-html\': filename+ \'.\'+extension+\'<br><small>\'+size+\' KB</small>\'}" data-poster="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAABkCAYAAABkW8nwAAAACXBIWXMAAA7DAAAOwwHHb6hkAAABCUlEQVR4nO3SQQHAIADEsBv+PTMT9JdoyLftDh47g4BYJMQiIRYJsUiIRUIsEmKREIuEWCTEIiEWCbFIiEVCLBJikRCLhFgkxCIhFgmxSIhFQiwSYpEQi4RYJMQiIRYJsUiIRUIsEmKREIuEWCTEIiEWCbFIiEVCLBJikRCLhFgkxCIhFgmxSIhFQiwSYpEQi4RYJMQiIRYJsUiIRUIsEmKREIuEWCTEIiEWCbFIiEVCLBJikRCLhFgkxCIhFgmxSIhFQiwSYpEQi4RYJMQiIRYJsUiIRUIsEmKREIuEWCTEIiEWCbFIiEVCLBJikRCLhFgkxCIhFgmxSIhFQiwSYpEQi4RYJMQisP2HrgHHDkcEwwAAAABJRU5ErkJggg==">\
@@ -883,7 +996,7 @@ ko.components.register('filemanager', {
                 <!--/ko-->\
                 <!--/ko-->\
                 <!--ko foreach: audios-->\
-                <!-- ko if: $parent.filter() === "" || $parent.filter() === "audios" || $parent.filter() === extension -->\
+                <!-- ko if: ($parent.filter() === "" || $parent.filter() === "audios" || $parent.filter() === extension) && ( $parent.search() === "" || String(filename).latinise().toLowerCase().indexOf(String($parent.search()).latinise().toLowerCase()) !== -1) -->\
                 <div data-type="file" data-bind="attr: {class: $.inArray($rawData, $parent.ids())>=0 ? \'item selected\':\'item\', \'data-raw\': JSON.stringify($data), \'data-src\': $parent.params.public_path + path}">\
                     <span class="item-select fa" data-bind="click: $parent.select_item"></span>\
                     <div class="item-preview" data-cus-type="audio" data-bind="attr: {\'data-cus-html\': \'#audio\'+($index()+1), title: filename + \'.\' + extension, \'data-src\': $parent.params.public_path + path, \'data-sub-html\': filename+ \'.\'+extension+\'<br><small>\'+size+\' KB</small>\'}">\
@@ -894,7 +1007,7 @@ ko.components.register('filemanager', {
                 <!--/ko-->\
                 <!--/ko-->\
                 <!--ko foreach: files-->\
-                <!-- ko if: $parent.filter() === "" || $parent.filter() === "files" || $parent.filter() === extension -->\
+                <!-- ko if: ($parent.filter() === "" || $parent.filter() === "files" || $parent.filter() === extension) && ( $parent.search() === "" || String(filename).latinise().toLowerCase().indexOf(String($parent.search()).latinise().toLowerCase()) !== -1) -->\
                 <div data-type="file" data-bind="attr: {class: $.inArray($rawData, $parent.ids())>=0 ? \'item selected\':\'item\', \'data-raw\': JSON.stringify($data), \'data-src\': $parent.params.public_path + path}">\
                     <span class="item-select fa" data-bind="click: $parent.select_item"></span>\
                     <div class="item-preview" data-bind="attr: {\'data-cus-html\': \'#file\'+($index()+1), title: filename + \'.\' + extension, \'data-src\': $parent.params.public_path + path, \'data-sub-html\': filename+ \'.\'+extension+\'<br><small>\'+size+\' KB</small>\'}">\
@@ -980,6 +1093,7 @@ ko.components.register('filemanager', {
             </div>\
         </div>\
     </div>\
+</script>\
 	<div data-bind="template: {name: params.template, afterRender: filemanager_rendered }"></div>\
 	<script type="text/html" id="filemanager-template"></script>'
 });
