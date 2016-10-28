@@ -19,9 +19,9 @@ class FileManagerServiceProvider extends ServiceProvider
         
         $this->publishes([
             // public
-              __DIR__.'/assets/src/css' => resource_path('assets/css'),
-              __DIR__.'/assets/src/js' => resource_path('assets/js'),
-//            __DIR__.'/assets/dist/' => public_path('assets'),
+//              __DIR__.'/assets/src/css' => resource_path('assets/css'),
+//              __DIR__.'/assets/src/js' => resource_path('assets/js'),
+            __DIR__.'/assets/dist/' => public_path('assets'),
             
             // config
             __DIR__.'/filemanager.php' => config_path('filemanager.php')

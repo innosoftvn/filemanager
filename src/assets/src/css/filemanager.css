@@ -648,6 +648,8 @@
 }
 #search-wrap .form-control {
     padding-right: 35px!important;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 #search-wrap #search-clear[data-toggle="true"] {
     display: block;

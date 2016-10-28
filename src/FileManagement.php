@@ -83,6 +83,24 @@ class FileManagement {
         if ($inp['disk_space_usage_computed'] == 'true') {
             $disk_space_usage = round(self::disk_total_space($auth_config['upload_dir']) / 1048576, 2);
         }
+        
+        // orderby filename
+        usort($files, function($left, $right){
+            return strcmp($left['filename'], $right['filename']) > 0;
+        });
+        usort($folders, function($left, $right){
+            return strcmp($left['filename'], $right['filename']) > 0;
+        });
+        usort($videos, function($left, $right){
+            return strcmp($left['filename'], $right['filename']) > 0;
+        });
+        usort($audios, function($left, $right){
+            return strcmp($left['filename'], $right['filename']) > 0;
+        });
+        usort($photos, function($left, $right){
+            return strcmp($left['filename'], $right['filename']) > 0;
+        });
+        
         return [
             'status'           => 'success',
             'paths'            => $breadcrumb,
