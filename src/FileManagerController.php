@@ -102,14 +102,14 @@ class FileManagerController extends Controller {
                     if(!$can_rename_folder) {
                         return ['status'=>'error', 'message'=>trans('filemanager::filemanager.rename_folder_denied')];
                     }
-                    rename($path.$inp['file']['filename'], $path.str_slug($inp['new_filename']));
+                    rename($path.'/'.$inp['file']['filename'], $path.'/'.str_slug($inp['new_filename']));
                     break;
                 default:
                     $can_rename_file = in_array('rename_files', $this->auth_config['permissions']);
                     if(!$can_rename_file) {
                         return ['status'=>'error', 'message'=>trans('filemanager::filemanager.rename_file_denied')];
                     }
-                    rename($path.$inp['file']['filename'].'.'.$inp['file']['extension'], $path.str_slug($inp['new_filename']).'.'.$inp['file']['extension']);
+                    rename($path.'/'.$inp['file']['filename'].'.'.$inp['file']['extension'], $path.'/'.str_slug($inp['new_filename']).'.'.$inp['file']['extension']);
                     break;
             }
             return ['status'=>'success', 'message'=>trans('filemanager::filemanager.saved')];
