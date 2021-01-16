@@ -2,8 +2,10 @@
 
 namespace InnoSoft\FileManager;
 
-class FileManagement {
+use Illuminate\Support\Str;
 
+class FileManagement
+{
     protected static $photo_formats = ['jpeg', 'bmp', 'cod', 'gif', 'ief', 'jpg', 'jfif', 'tif', 'ras', 'cmx', 'ico', 'pnm', 'pbm', 'pgm', 'ppm', 'rgb', 'xbm', 'xpm', 'xwd', 'png', 'jps', 'fh'];
     protected static $video_formats = ['avi', 'mov', 'mp4', 'mpeg', 'mpg', 'webm', 'wma'];
     protected static $audio_formats = ['ac3', 'aiff', 'm4a', 'mid', 'mp3', 'ogg', 'wav'];
@@ -153,7 +155,7 @@ class FileManagement {
 
     public static function upload($file, $dir, $allowed = null, $file_name = null) {
         if(!$file->isValid()) return ['status'=>'error', 'message'=>trans('filemanager::filemanager.file_not_valid'), 'note'=>'not valid'];
-        $filename = str_slug(basename($file->getClientOriginalName(), '.'.$file->getClientOriginalExtension()), '-');
+        $filename = Str::slug(basename($file->getClientOriginalName(), '.'.$file->getClientOriginalExtension()), '-');
         $extension = strtolower($file->getClientOriginalExtension());
         if ( ($allowed != null) && (!in_array($extension, $allowed)) ) {
             return ['status'=>'warning', 'message'=>trans('filemanager::filemanager.extension_not_allowed')];

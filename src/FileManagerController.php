@@ -3,15 +3,14 @@
 namespace InnoSoft\FileManager;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
-class FileManagerController extends Controller {
-
+class FileManagerController extends Controller
+{
     protected $auth_config;
 
     public function __construct() {
-        if (\Request::get('_token') !== csrf_token()) {
-            abort(404);
-        }
         $user_model = \App::make(config('auth.providers.users.model'));
         if (!(method_exists($user_model, 'allowed_filemanager'))) {
             abort(404);
@@ -21,18 +20,21 @@ class FileManagerController extends Controller {
         }
     }
 
-    public function getIndex() {
+    public function index() {
+        if (!Hash::check(env('APP_KEY'), request()->secret)) {
+            abort(404);
+        }
         return view('filemanager::dialog')->with('auth_config', $this->auth_config);
     }
 
-    public function postIndex() {
+    public function store() {
         return FileManagement::scandir($this->auth_config);
     }
 
-    public function postCreateDir(){
+    public function postCreateDir() {
         if(!in_array('create_folders', $this->auth_config['permissions'])) return ['status'=>'error', 'message'=>trans('filemanager::filemanager.create_dir_denied')];
         $path = $this->auth_config['upload_dir'] . \Request::get('path');
-        $dirname = str_slug(\Request::get('dirname'), '-');
+        $dirname = Str::slug(\Request::get('dirname'), '-');
         try {
             FileManagement::createDir($path.'/'.$dirname);
             return ['status'=>'success', 'message'=>trans('filemanager::filemanager.created_dir', ['Dirname'=>$dirname])];
@@ -41,7 +43,7 @@ class FileManagerController extends Controller {
         }
     }
 
-    public function postDelete(){
+    public function postDelete() {
         $can_delete_folder = in_array('delete_folders', $this->auth_config['permissions']);
         $can_delete_file = in_array('delete_files', $this->auth_config['permissions']);
         if(!$can_delete_folder && !$can_delete_file) {
@@ -69,14 +71,14 @@ class FileManagerController extends Controller {
         }
     }
 
-    public function postUpload(){
+    public function postUpload() {
         $can_upload_file = in_array('upload_files', $this->auth_config['permissions']);
         if(!$can_upload_file) {
             return ['status'=>'error', 'message'=>trans('filemanager::filemanager.upload_denied')];
         }
         if(!\Request::hasFile('file')) return ['status'=>'error', 'message'=>trans('filemanager::filemanager.file_not_valid'), 'note'=>'file not found'];
         $inp = \Request::all();
-        $client_size = $inp['file']->getClientSize();
+        $client_size = $inp['file']->getSize();
         // check max_size_upload
         if($client_size > ($this->auth_config['max_size_upload'] * 1048576)) return ['status'=>'warning', 'message'=>trans('filemanager::filemanager.max_size_upload_denied', ['Size'=>$this->auth_config['max_size_upload']])];
         // check disk_total_space of current user
@@ -92,7 +94,7 @@ class FileManagerController extends Controller {
         }
     }
 
-    public function postRename(){
+    public function postRename() {
         $inp = \Request::all();
         try {
             $path = public_path( $this->auth_config['upload_dir'] . $inp['path'] );
@@ -102,14 +104,14 @@ class FileManagerController extends Controller {
                     if(!$can_rename_folder) {
                         return ['status'=>'error', 'message'=>trans('filemanager::filemanager.rename_folder_denied')];
                     }
-                    rename($path.'/'.$inp['file']['filename'], $path.'/'.str_slug($inp['new_filename']));
+                    rename($path.'/'.$inp['file']['filename'], $path.'/'.Str::slug($inp['new_filename']));
                     break;
                 default:
                     $can_rename_file = in_array('rename_files', $this->auth_config['permissions']);
                     if(!$can_rename_file) {
                         return ['status'=>'error', 'message'=>trans('filemanager::filemanager.rename_file_denied')];
                     }
-                    rename($path.'/'.$inp['file']['filename'].'.'.$inp['file']['extension'], $path.'/'.str_slug($inp['new_filename']).'.'.$inp['file']['extension']);
+                    rename($path.'/'.$inp['file']['filename'].'.'.$inp['file']['extension'], $path.'/'.Str::slug($inp['new_filename']).'.'.$inp['file']['extension']);
                     break;
             }
             return ['status'=>'success', 'message'=>trans('filemanager::filemanager.saved')];
@@ -118,7 +120,7 @@ class FileManagerController extends Controller {
         }
     }
 
-    public function postSavePhotoEditor(){
+    public function postSavePhotoEditor() {
         $can_photo_edit = in_array('photo_editor', $this->auth_config['permissions']);
         if(!$can_photo_edit) {
             return ['status'=>'error', 'message'=>trans('filemanager::filemanager.photo_editor_denied')];
